@@ -17,6 +17,7 @@ class schedules(models.Model):
         return self.date
 
 class events(models.Model):
+    schedule = models.ForeignKey(schedules, on_delete=models.CASCADE)
     start = models.TimeField()
     end = models.TimeField()
     title = models.CharField(max_length = 100)

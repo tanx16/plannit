@@ -43,11 +43,11 @@ class RegFormView(View):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/newprofile')
+                    return redirect('/profiles/' + str(user.person.id))
         return render(request, self.template_name, {'form': form})
-
 def login_view(request):
     return render(request, "login.html", {})
+
 
 #def register_view(request):
 #    if request.method == "POST":

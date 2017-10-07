@@ -16,9 +16,10 @@ def index(request):
 def loadprof(request, profile_id):
     try:
         user = person.objects.get(id=profile_id)
+        user_schedules = schedules.objects.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
 
 class RegFormView(View):
     form_class = regForm

@@ -27,7 +27,7 @@ class schedules(models.Model):
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     def __str__(self):
-        return self.date
+        return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 
 class events(models.Model):
     schedule = models.ForeignKey(schedules, on_delete=models.CASCADE)

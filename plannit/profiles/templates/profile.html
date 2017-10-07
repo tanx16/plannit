@@ -25,6 +25,12 @@
             <div class="my_schedules_header">
                 <h3>{{user.name}}'s Plans</h3>
             </div>
+            <p>
+                {% for schedule in user_schedules %}
+                {{schedule.place}}:
+                {{schedule.date}}
+                {% endfor %}
+            </p>
     </body>
 
 </html>

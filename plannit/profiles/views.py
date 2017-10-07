@@ -25,7 +25,7 @@ class RegFormView(View):
     template_name = 'register.html'
 
     def get(self, request):
-        form = self.form_class(None)
+        form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
@@ -43,7 +43,7 @@ class RegFormView(View):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/profiles')
+                    return redirect('/newprofile')
         return render(request, self.template_name, {'form': form})
 
 def login_view(request):

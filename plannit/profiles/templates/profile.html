@@ -1,4 +1,5 @@
 {% load static %}
+<<<<<<< HEAD
 <html>
 
     <head>
@@ -8,7 +9,11 @@
     <body>
             <!--Header: avatar and info-->
             <div class="left">
+                {%if user.pic%}
                 <img src="{% static user.pic.url %}"/>
+                {%else%}
+                <img src="{% static 1.PNG %}"/>
+                {%endif%}
             </div>
 
             <div class="right">

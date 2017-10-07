@@ -1,33 +1,57 @@
 body {
+     background-image: url("untitled9.png");
     background-color: lightblue;
   }
-#margin {
-    background-color: yellow;
-    height: 450px;
-
-
-
+#mainbody {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
 }
 
+#tags {
+    background-color: rgba(255, 255, 255, 0.);
+
+}
+#tagactive {
+    background-color: rgba(255, 255, 255, 0.);
+
+}
 #global {
     background-color: blue;
     margin: 0px;
     padding: 0px;
-    height: 450px;
+    height: 100%;
+}
+
+
+#schedule {
+
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 10;
 
 
 
 
 }
+#schedulerow {
+  font-family: 'Handlee', cursive;
+  margin: 3px;
+}
 
+#h{
 
-#profile {
-    background-color: red;
-    margin: 0px;
-    padding: 0px;
-    height: 450px;
+  font-family: 'Handlee', cursive; font-size: 20px;
+}
 
+#title{
 
+  font-family: 'Concert One', cursive; font-size: 80px;
+}
+footer {
 
-
+  font-size: 10px;
+  opacity: 0.5;
+}
+#si{
+  width:24px; height:24px;
 }

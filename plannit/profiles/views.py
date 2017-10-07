@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views import generic
 from django.views.generic import View
-from .forms import regForm
+from .forms import regForm, scheduleForm, eventForm
 from .models import *
 
 # Create your views here.
@@ -63,3 +63,48 @@ def login_view(request):
 
 def logout_view(request):
     return render(request, "login.html", {})
+
+class ScheduleFormView(View):
+    form_class = scheduleForm
+    template_name = 'new_schedule.html'
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            schedule  = form.save(commit = False)
+            title  = form.cleaned_data['title']
+            place = form.cleaned_data['place']
+            date = form.cleaned_data['date']
+            schedule.save()
+        if schedule:
+            # TODO: Add events url
+            return redirect('/events/')
+
+        return render(request, self.template_name, {'form': form})
+
+class EventFormView(View):
+    form_class = eventForm
+    template_name = 'new_schedule.html'
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+
+
+        if form.is_valid():
+            #TODO: Add schedule info from parent 
+            event  = form.save(commit = False)
+            title  = form.cleaned_data['title']
+            start = form.cleaned_data['start']
+            end  = form.cleaned_data['end']
+            location  = form.cleaned_data['location']
+            event.save()
+
+        return render(request, self.template_name, {'form': form})

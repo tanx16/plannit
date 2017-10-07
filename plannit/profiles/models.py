@@ -29,6 +29,7 @@ post_save.connect(create_person, sender = User)
 #    instance.person.save()
 
 class schedules(models.Model):
+    title = models.CharField(max_length = 100)
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)

@@ -4,40 +4,57 @@ html * {
 }
 
 div {
-    background-color: rgba(0, 0, 250, 0.1);
+    background-color: rgba(0, 0, 250, 0.1); /* eecs blue */
     text-align: center;
     float: center;
     padding-top: 2em;
     padding-bottom: 2em;
 }
 
-/*
-.info {
-    text-align: left;
-    padding-left: 40px;
-    float:left;
-    width:75%;
-    overflow:hidden;
-}
-
-.avatar {
-    float:left;
-    width:25%;
-    overflow:hidden;
-
-}
-*/
-
 .left {
-    width: 15%;
+    width: 25%;
     height: 200px;
     float: left;
+    overflow: hidden;
 }
+
 .right {
     margin-left: 15%;
     height: 200px;
+    overflow: hidden;
 }
 
 img {
     width: 200px;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    width: 1000px;
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 250, 0.5); /* eecs blue */
+    color: white;
+}
+
+.button_zone {
+    text-align: center;
+}
+
+.my_schedules_header {
+    padding-top: 1em;
+    padding-bottom: 1em;
 }

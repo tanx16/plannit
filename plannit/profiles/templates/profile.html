@@ -6,20 +6,25 @@
     </head>
 
     <body>
-
+            <!--Header: avatar and info-->
             <div class="left">
                 <img src="{% static user.pic.url %}"/>
             </div>
 
             <div class="right">
-                <div>
-                    <h1>{{user.name}}</h1>
-                    <h1>{{user.hometown}}</h1>
-                    <h1>{{user.bio}}</h1>
-                </div
+                <h1>{{user.name}}</h1>
+                <h1>{{user.hometown}}</h1>
+                <h1>{{user.bio}}</h1>
             </div>
 
+            <p class="button_zone">
+            <!--'Add Schedule' Button-->
+                <button type="button" class="button">Make a new plan</button>
+            </p>
 
+            <div class="my_schedules_header">
+                <h3>{{user.name}}'s Plans</h3>
+            </div>
     </body>
 
 </html>

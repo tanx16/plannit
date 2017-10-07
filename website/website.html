@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <title>Page Title</title>
+</head>
+
+<!-- Latest compiled and minified CSS -->
+
+
+<body>
+
+
+<div>
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+</div>
+<div class="row">
+
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+
+        <h2>Dynamic Tabs</h2>
+        <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class
+            with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+
+        <ul class="nav nav-tabs nav-justified ">
+            <li class="active"><a data-toggle="tab" href="#home">Global</a></li>
+            <li><a data-toggle="tab" href="#menu1">Profile</a></li>
+
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Location</a></li>
+                            <li><a href="#">Price</a></li>
+                            <li><a href="#">Popularity</a></li>
+                        </ul>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-7">
+                  </div>
+                    <form class="form-inline">
+                    <div class="form-group">
+                        <label for="search "></label>
+                        <input type="search" class="form-control" id="search">
+                    </div>
+
+                </div>
+
+                <p>
+                <div class="row">
+                    <div class="col-md-8">Steven's Day in Berkeley</div>
+                    <div class="col-md-2">4 likes</div>
+                    <div class="col-md-2">$$</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="left-aligned">
+                            <p>
+                                Steven's plan for a fun day in Berkeley.
+                            </p>
+                            <p>
+                                What happens next may shock you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">Photo Goes Here</div>
+                </div>
+                </p>
+
+            </div>
+
+
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+<!--<div class="col-sm-7" ><button type="button" class="btn btn-info">Global</button></div>
+<div class="col-sm-3" ><button type="button" class="btn btn-info">Profile</button></div>-->
+
+<div class="col-sm-2"></div>
+</div>
+
+
+</body>
+</html>

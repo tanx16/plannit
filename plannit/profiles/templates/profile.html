@@ -1,5 +1,25 @@
 {% load static %}
-<h1>{{user.name}}</h1>
-<h1>{{user.bio}}</h1>
-<h1>{{user.hometown}}</h1>
-<img src="{% static user.pic.url %}"/>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{% static 'css/profile_style.css' %}">
+    </head>
+
+    <body>
+
+            <div class="left">
+                <img src="{% static user.pic.url %}"/>
+            </div>
+
+            <div class="right">
+                <div>
+                    <h1>{{user.name}}</h1>
+                    <h1>{{user.hometown}}</h1>
+                    <h1>{{user.bio}}</h1>
+                </div
+            </div>
+
+
+    </body>
+
+</html>

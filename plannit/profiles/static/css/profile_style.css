@@ -1,0 +1,43 @@
+html * {
+    font-family: helvetica;
+    /*height: 100%;*/
+}
+
+div {
+    background-color: rgba(0, 0, 250, 0.1);
+    text-align: center;
+    float: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+/*
+.info {
+    text-align: left;
+    padding-left: 40px;
+    float:left;
+    width:75%;
+    overflow:hidden;
+}
+
+.avatar {
+    float:left;
+    width:25%;
+    overflow:hidden;
+
+}
+*/
+
+.left {
+    width: 15%;
+    height: 200px;
+    float: left;
+}
+.right {
+    margin-left: 15%;
+    height: 200px;
+}
+
+img {
+    width: 200px;
+}

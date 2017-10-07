@@ -11,7 +11,7 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    return
+    raise Http404("You've tried to access the profile root directory. Don't do this.")
 
 def loadprof(request, profile_id):
     try:
@@ -38,7 +38,7 @@ class RegFormView(View):
             user.set_password(password)
             user.save()
 
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
             if user:
                 if user.is_active:

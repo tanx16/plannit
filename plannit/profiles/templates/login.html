@@ -1,5 +1,21 @@
-<form method = "post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type = "submit"></button>
-</form>
+{% load staticfiles %}
+
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{% static 'css/login_register_style.css' %}">
+    </head>
+
+    <body>
+
+        <div>
+            <form method = "post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type = "submit"></button>
+            </form>
+        </div>
+
+    </body>
+
+</html>

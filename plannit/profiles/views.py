@@ -11,21 +11,22 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    return
+    raise Http404("You've tried to access the profile root directory. Don't do this.")
 
 def loadprof(request, profile_id):
     try:
         user = person.objects.get(id=profile_id)
+        user_schedules = schedules.objects.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
 
 class RegFormView(View):
     form_class = regForm
     template_name = 'register.html'
 
     def get(self, request):
-        form = self.form_class(None)
+        form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
@@ -38,16 +39,16 @@ class RegFormView(View):
             user.set_password(password)
             user.save()
 
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/profiles')
+                    return redirect('/profiles/' + str(user.person.id))
         return render(request, self.template_name, {'form': form})
-
 def login_view(request):
     return render(request, "login.html", {})
+
 
 #def register_view(request):
 #    if request.method == "POST":

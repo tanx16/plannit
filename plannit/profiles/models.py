@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 class person(models.Model):
-#    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length = 100)
     bio = models.CharField(max_length = 1000)
     hometown = models.CharField(max_length = 100)
@@ -13,6 +13,12 @@ class person(models.Model):
     def __str__(self):
         return self.name
 
+def create_person(sender, **kwargs):
+    user = kwargs["instance"]
+    if kwargs["created"]:
+        newperson = person(user=user)
+        newperson.save()
+post_save.connect(create_person, sender = User)
 #@receiver(post_save, sender=User)
 #def create_user_profile(sender, instance, created, **kwargs):
 #    if created:

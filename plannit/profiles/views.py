@@ -90,12 +90,15 @@ class EventFormView(View):
     form_class = eventForm
     template_name = 'new_schedule.html'
 
-    # No get method since events should not be viewable alone
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
     def post(self, request):
-        form = self.form_class(request.POST)
+
 
         if form.is_valid():
-            schedule = 
+            #TODO: Add schedule info from parent 
             event  = form.save(commit = False)
             title  = form.cleaned_data['title']
             start = form.cleaned_data['start']

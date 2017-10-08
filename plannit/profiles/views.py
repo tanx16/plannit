@@ -106,8 +106,9 @@ class ScheduleFormView(View):
         if form.is_valid():
             schedule  = form.save(commit = False)
             owner = request.user.person
-            title  = form.cleaned_data['title']
             place = form.cleaned_data['place']
+            title  = form.cleaned_data['title']
+            public = form.cleaned_data['public']
             schedule.save()
             return redirect("/profiles/addevent/")
 

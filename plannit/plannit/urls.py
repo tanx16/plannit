@@ -19,7 +19,7 @@ from profiles import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^profiles/', include('profiles.urls')),
+    url(r'^profiles/', include('profiles.urls')), #regex this shit better
     url(r'^accounts/profile/', views.home),
     url(r'^index/', include('index.urls')),
     url(r'^', include('index.urls')),

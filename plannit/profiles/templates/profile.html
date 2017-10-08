@@ -33,6 +33,11 @@
                 {% for schedule in user_schedules %}
                 {{schedule.place}}:
                 {{schedule.date}}
+                {% for event in schedule.events_set.all%}
+                <br />{{event}}
+                {% endfor %}
+                <a href="/profiles/delete/{{ schedule.id }}/{{ user.id }}">Delete</a>
+                <br>
                 {% endfor %}
             </p>
     </body>

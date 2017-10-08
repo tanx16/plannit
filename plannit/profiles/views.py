@@ -1,26 +1,37 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views import generic
-from django.views.generic import View
+from django.views.generic import View, DetailView
 from .forms import regForm, UserForm, PersonForm, scheduleForm, eventForm, LoginForm
 from django.contrib.auth import logout
 from .models import *
-from django.http import HttpResponseRedirect
-
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import RedirectView
 
 # Create your views here.
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
 
+def logged_out(request):
+    return render(request, "loggedoutprofile.html", {})
+
+def delete(request, pk, user_id):
+    obj = schedules.objects.get(pk=pk)
+    obj.delete()
+    return HttpResponseRedirect('/profiles/' + str(user_id))
+class ScheduleDelete(DeleteView):
+    model = schedules
+    success_url = reverse_lazy('index')
+    template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
     try:
         user = person.objects.get(id=profile_id)
-        user_schedules = schedules.objects.all()
+        user_schedules = user.schedules_set.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
     if request.user.person.id == profile_id:
@@ -121,20 +132,22 @@ class ScheduleFormView(View):
 
         return render(request, self.template_name, {'form': form})
 
-class EventFormView(View):
+class EventFormView(DetailView):
     form_class = eventForm
     template_name = 'newevent.html'
 
-    def get(self, request):
+    def get(self, request, schedule_id):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
-    def post(self, request):
+    def post(self, request, schedule_id):
         form = self.form_class(request.POST)
         if form.is_valid():
             sid = self.kwargs['schedule_id']
-            event  = form.save(commit = False)
-            schedule = schedules.objects.get(id=sid) 
+            event = form.save(commit = False)
+            schedule = schedules.objects.get(id=sid)
+            event.schedule = schedule
             event.save()
-
-        return render(request, self.template_name, {'form': form, 'events': schedule.events_set.all()})
+            print(schedule.events_set.all())
+            return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all(), 'userid': schedule.owner.id})
+        return render(request, self.template_name, {'form': form, 'userid':schedule.owner.id})

@@ -12,16 +12,8 @@
             <form method = "post">
               {% csrf_token %}
               {{ form.as_p }}
-              <button type = "submit">Add Event</button>
-              <a href="../../{{userid}}">Finish</button>
+              <button type = "submit"></button>
             </form>
-        </div>
-        <div>
-            {{event.count}}
-            {% for evet in event %}
-            <h1>Event:</h1>
-                {{evet}}
-            {% endfor %}
         </div>
 
     </body>

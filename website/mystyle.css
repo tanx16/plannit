@@ -1,6 +1,9 @@
 body {
-     background-image: url("untitled9.png");
+     background-image: url("untitled12.png");
+     background-size: 65%;
     background-color: lightblue;
+    background-repeat: no-repeat;
+
   }
 #mainbody {
     background-color: rgba(255, 255, 255, 0.5);
@@ -55,7 +58,7 @@ footer {
 .carousel-inner > .item > img {
   width:1920px;
   height:400px;
-  
+
 }
 
 
@@ -64,4 +67,8 @@ footer {
   padding-left: 2%;
   padding-right: 2%;
   margin: 5;
+}
+#margin{
+  height:100%;
+
 }

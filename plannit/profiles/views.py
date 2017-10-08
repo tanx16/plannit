@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
@@ -9,13 +8,22 @@ from django.views.generic import View, DetailView
 from .forms import regForm, UserForm, PersonForm, scheduleForm, eventForm, LoginForm
 from django.contrib.auth import logout
 from .models import *
-from django.http import HttpResponseRedirect
-
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import RedirectView
 
 # Create your views here.
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
 
+def delete(request, pk, user_id):
+    obj = schedules.objects.get(pk=pk)
+    obj.delete()
+    return HttpResponseRedirect('/profiles/' + str(user_id))
+class ScheduleDelete(DeleteView):
+    model = schedules
+    success_url = reverse_lazy('index')
+    template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
     try:

@@ -1,5 +1,6 @@
 <form method="post">
   {% csrf_token %}
-  {{ profile_form.as_p }}
+  {{ profile_form.username }}
+  {{ profile_form.password}}
   <button type="submit">Save changes</button>
 </form>

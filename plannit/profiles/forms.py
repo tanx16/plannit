@@ -26,10 +26,10 @@ class PersonForm(forms.ModelForm):
 class scheduleForm(forms.ModelForm):
     class Meta:
         model = schedules
-        fields = ['owner', 'place', 'title'] 
+        fields = ['place', 'title', 'price', 'public'] 
 
 class eventForm(forms.ModelForm):
     class Meta:
         model = events
-        fields = ['schedule', 'start', 'end', 'title', 'location']
+        fields = ['start', 'end', 'title', 'location']
 

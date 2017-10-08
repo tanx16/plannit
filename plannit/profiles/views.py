@@ -16,6 +16,11 @@ from django.views.generic.base import RedirectView
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
 
+def checkuser(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/profiles/' +str(request.user.person.id))
+    return HttpResponseRedirect('/profiles/login')
+
 def logged_out(request):
     return render(request, "loggedoutprofile.html", {})
 
@@ -112,7 +117,7 @@ def home(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/profiles')
+    return redirect('/index')
 
 class ScheduleFormView(View):
     form_class = scheduleForm

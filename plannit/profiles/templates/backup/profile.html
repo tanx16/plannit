@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{% static 'css/profile_style.css' %}">
+    </head>
+
+    <body>
+            <!--Header: avatar and info-->
+            <div class="left">
+                {%if user.pic%}
+                <img src="{% static user.pic.url %}"/>
+                {%else%}
+                <img src="{% static 1.PNG %}"/>
+                {%endif%}
+            </div>
+
+            <div class="right">
+                <h1>{{user.name}}</h1>
+                <h1>{{user.hometown}}</h1>
+                <h1>{{user.bio}}</h1>
+            </div>
+
+            <p class="button_zone">
+            <!--'Add Schedule' Button-->
+                <button type="button" class="button">Make a new plan</button>
+            </p>
+
+            <div class="my_schedules_header">
+                <h3>{{user.name}}'s Plans</h3>
+            </div>
+            <p>
+                {% for schedule in user_schedules %}
+                {{schedule.place}}:
+                {{schedule.date}}
+                {% for event in schedule.events_set.all%}
+                <br />{{event}}
+                {% endfor %}
+                <a href="/profiles/delete/{{ schedule.id }}/{{ user.id }}">Delete</a>
+                <br>
+                {% endfor %}
+            </p>
+    </body>
+
+</html>

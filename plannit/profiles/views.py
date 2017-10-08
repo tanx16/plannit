@@ -6,13 +6,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views import generic
 from django.views.generic import View
-from .forms import regForm, UserForm, PersonForm, scheduleForm, eventForm
+from .forms import regForm, UserForm, PersonForm, scheduleForm, eventForm, LoginForm
+from django.contrib.auth import logout
 from .models import *
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
+
 
 def loadprof(request, profile_id):
     try:
@@ -20,10 +23,12 @@ def loadprof(request, profile_id):
         user_schedules = schedules.objects.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
+    if request.user.person.id == profile_id:
+        return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
     return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
 
 class LoginView(View):
-    form_class = UserForm
+    form_class = LoginForm
     template_name = 'login.html'
 
     def get(self, request):
@@ -41,6 +46,7 @@ class LoginView(View):
                     login(request, user)
                     return redirect('/profiles/' + str(user.person.id))
         return render(request, self.template_name, {'form': form})
+
 class RegFormView(View):
     form_class = regForm
     template_name = 'register.html'
@@ -69,12 +75,14 @@ class RegFormView(View):
         return render(request, self.template_name, {'form': form})
 
 def update_person(request):
+    print(request.method)
     if request.method == 'POST':
         person_form = PersonForm(request.POST, instance = request.user.person)
         if person_form.is_valid():
             person_form.save()
             return redirect("/profiles/" + str(request.user.person.id))
     else:
+        print(">>>>"+str((request.user)))
         person_form = PersonForm(instance = request.user.person)
     return render(request, 'newprofile.html', {'profile_form' : person_form})
 
@@ -88,9 +96,12 @@ def update_person(request):
 #        form = UserCreationForm()
 #    return render(request, "register.html", {'form': form})
 
+def home(request):
+    return HttpResponseRedirect('/')
 
 def logout_view(request):
-    return render(request, "login.html", {})
+    logout(request)
+    return redirect('/profiles')
 
 class ScheduleFormView(View):
     form_class = scheduleForm

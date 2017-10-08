@@ -11,7 +11,8 @@
         <div>
             <form method = "post">
               {% csrf_token %}
-              {{ form.as_p }}
+              {{ form.username }}
+              {{ form.password }}
               <button type = "submit"></button>
             </form>
         </div>

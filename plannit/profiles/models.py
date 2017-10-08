@@ -13,6 +13,10 @@ class person(models.Model):
     def __str__(self):
         return self.name
 
+class login(models.Model):
+    username = models.CharField(max_length = 100)
+    password = models.CharField(max_length = 100)
+
 def create_person(sender, **kwargs):
     user = kwargs["instance"]
     if kwargs["created"]:

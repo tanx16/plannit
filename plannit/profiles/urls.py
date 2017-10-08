@@ -19,9 +19,9 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^(?P<profile_id>[0-9]+)/$', views.loadprof, name='loadprof'),
-    url(r'^login/', views.RegFormView.as_view(), name = 'login'),
+    url(r'^login/', views.LoginView.as_view(), name = 'login'),
     url(r'^register/', views.RegFormView.as_view(), name = 'register'),
-    url(r'^newprofile/', views.RegFormView.as_view(), name = 'newprofile'),
+    url(r'^newprofile/', views.update_person, name = 'newprofile'),
     url(r'^logout/', views.logout_view),
     url(r'^newschedule/', views.ScheduleFormView.as_view(), name = 'newschedule')
 ]

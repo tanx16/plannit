@@ -106,17 +106,9 @@ class ScheduleFormView(View):
             schedule  = form.save(commit = False)
             schedule.owner = request.user.person
             schedule.save()
-            return redirect("/profiles/addevent/")
+            return redirect("/profiles/addevent/"+ str(schedule.id))
 
         return render(request, self.template_name, {'form': form})
-
-def loadSchedule(request, schedule_id):
-    try:
-        schedule = schedule.objects.get(id=schedule_id)
-        schedule_events = schedule.event_set.all()
-    except person.DoesNotExist:
-        raise Http404("This is not the schedule you are looking for.")
-    return render(request, 'newschedule.html', {'user': user, "user_schedules": user_schedules})
 
 class EventFormView(View):
     form_class = eventForm
@@ -129,8 +121,9 @@ class EventFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            sid = self.kwargs['schedule_id']
             event  = form.save(commit = False)
-            schedule = request.user.schedule #Does this work?
+            schedule = schedules.objects.get(id=sid) 
             event.save()
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'events': schedule.events_set.all()})

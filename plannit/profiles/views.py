@@ -6,8 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views import generic
 from django.views.generic import View
-from .forms import regForm
+from .forms import regForm, UserForm, PersonForm
 from .models import *
+
 
 # Create your views here.
 def index(request):
@@ -20,6 +21,25 @@ def loadprof(request, profile_id):
         raise Http404("The profile you are looking for does not exist.")
     return render(request, 'profile.html', {'user': user})
 
+class LoginView(View):
+    form_class = UserForm
+    template_name = 'login.html'
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username = username, password = password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('/profiles/' + str(user.person.id))
+        return render(request, self.template_name, {'form': form})
 class RegFormView(View):
     form_class = regForm
     template_name = 'register.html'
@@ -37,17 +57,24 @@ class RegFormView(View):
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
-
             user = authenticate(username = username, password = password)
-
             if user:
                 if user.is_active:
                     login(request, user)
+                    user.person.name = user.first_name + user.last_name
+                    user.person.bio = "My Bio"
                     return redirect('/profiles/' + str(user.person.id))
         return render(request, self.template_name, {'form': form})
-def login_view(request):
-    return render(request, "login.html", {})
 
+def update_person(request):
+    if request.method == 'POST':
+        person_form = PersonForm(request.POST, instance = request.user.person)
+        if person_form.is_valid():
+            person_form.save()
+            return redirect("/profiles/" + str(request.user.person.id))
+    else:
+        person_form = PersonForm(instance = request.user.person)
+    return render(request, 'newprofile.html', {'profile_form' : person_form})
 
 #def register_view(request):
 #    if request.method == "POST":

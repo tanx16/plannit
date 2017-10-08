@@ -38,8 +38,8 @@ class schedules(models.Model):
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     # TODO: Limit price to a certain range (1-5)
-    price = models.PositiveIntegerField()
-    public = models.BooleanField(default=0) 
+    #price = models.PositiveIntegerField(default=0)
+    # public = models.BooleanField(default=0) 
     def __str__(self):
         return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 

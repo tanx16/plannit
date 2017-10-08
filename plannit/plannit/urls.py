@@ -20,4 +20,5 @@ from profiles import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^profiles/', include('profiles.urls')),
+    url(r'^accounts/profile/', views.home)
 ]

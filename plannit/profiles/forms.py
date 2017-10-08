@@ -1,9 +1,15 @@
 from django.contrib.auth.models import User
 from django import forms
 from .models import person
-
+from .models import login
 from .models import events
-from .models import schedules    
+from .models import schedules
+
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = login
+        fields = ['username', 'password']
 
 class regForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -26,10 +32,10 @@ class PersonForm(forms.ModelForm):
 class scheduleForm(forms.ModelForm):
     class Meta:
         model = schedules
-        fields = ['owner', 'place', 'title'] 
+        fields = ['place', 'title'] 
 
 class eventForm(forms.ModelForm):
     class Meta:
         model = events
-        fields = ['schedule', 'start', 'end', 'title', 'location']
+        fields = ['start', 'end', 'title', 'location']
 

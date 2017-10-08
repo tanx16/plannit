@@ -13,6 +13,10 @@ class person(models.Model):
     def __str__(self):
         return self.name
 
+class login(models.Model):
+    username = models.CharField(max_length = 100)
+    password = models.CharField(max_length = 100)
+
 def create_person(sender, **kwargs):
     user = kwargs["instance"]
     if kwargs["created"]:
@@ -33,6 +37,9 @@ class schedules(models.Model):
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
+    # TODO: Limit price to a certain range (1-5)
+    #price = models.PositiveIntegerField(default=0)
+    # public = models.BooleanField(default=0) 
     def __str__(self):
         return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 

@@ -33,13 +33,13 @@ post_save.connect(create_person, sender = User)
 #    instance.person.save()
 
 class schedules(models.Model):
-    title = models.CharField(max_length = 100, default='Untitled')
+    title = models.CharField(max_length = 100)
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     # TODO: Limit price to a certain range (1-5)
     #price = models.PositiveIntegerField(default=0)
-    # public = models.BooleanField(default=0) 
+    # public = models.BooleanField(default=0)
     def __str__(self):
         return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 

@@ -207,14 +207,13 @@
     <!-- PRofiLe!!! -->
 
     <div id="menu1" class="tab-pane fade">
-        <h3>Your Profile</h3>
+        <h3>{{user.name}}</h3>
 
             <div class="left">
                 <img src="{% static '/img/me.jpg' %}" class="avatar">
             </div>
 
             <div class="right">
-                <h1>{{user.name}}</h1>
                 <h1>{{user.hometown}}</h1>
                 <h1>{{user.bio}}</h1>
             </div>
@@ -235,9 +234,7 @@
             </p>
 
     </div>
-
     </div>
-
 
     </div>
     </div>

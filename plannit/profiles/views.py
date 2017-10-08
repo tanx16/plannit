@@ -16,6 +16,9 @@ from django.views.generic.base import RedirectView
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
 
+def logged_out(request):
+    return render(request, "loggedoutprofile.html", {})
+
 def delete(request, pk, user_id):
     obj = schedules.objects.get(pk=pk)
     obj.delete()

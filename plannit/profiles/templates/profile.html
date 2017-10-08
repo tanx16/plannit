@@ -50,7 +50,7 @@
             <div class="row">
               <div  class="col-sm-12">
                 <div class="btn-group btn-group-justified">
-                <a href="index.html" id="nonclicked" class="btn btn-primary">Global</a>
+                <a href="../../index" id="nonclicked" class="btn btn-primary">Global</a>
                 <a href="#" id="clicked" class="btn btn-primary">Profile</a>
 
 
@@ -80,9 +80,9 @@
     <div class="row"><div style="height:0.5% ; padding: 0.5%;" class="col-sm-12"></div></div>
     <div class="row" style="padding: 1% ;">
 
-      <div class="col-sm-4">  <img id="profilepicture" src="retard.jpg"></div>
+      <div class="col-sm-4">  <img id="profilepicture" src="{% static '/img/retard.jpg'%}"></div>
 
-      <div class="col-sm-6; text-align: justify"> <p id="bh"> FEEDER <  /p><br>
+      <div class="col-sm-6; text-align: justify"> <p id="bh"> FEEDER </p><br>
 
       <p> This guy just always dies then proceeds to act suprised like he wasnt expecting to be the dissapoointment that he is to everyone around him </p></div>
 
@@ -104,7 +104,7 @@
                 <div class="row"><div style="height:0.5% ; padding: 0.5%;" class="col-sm-12"></div></div>
 
 
-    <div   class="row"> <button type="Add Schedule" class="btn btn-default btn-block">Add Schedule</button>  </div>
+    <div   class="row"> <a href = "../newschedule"><button type="Add Schedule" class="btn btn-default btn-block">Add Schedule</button></a>  </div>
 
     <div class="row"><div style="height:0.5% ; padding: 1%;" class="col-sm-12"></div></div></div>
     </div>
@@ -124,11 +124,11 @@
 
 
                 <div id="h" class="col-sm-8">Steven's Day in Berkeley</div>
-                <div  class="col-sm-1">4 <img id="si" src="heart.png"></div>
-                <div class="col-sm-2"> <img id="si" src="dollaru.png"><img id="si" src="dollaru.png">
+                <div  class="col-sm-1">4 <img id="si" src={% static '/img/heart.png'%}></div>
+                <div class="col-sm-2"> <img id="si" src={% static '/img/dollaru.png'%}><img id="si" src={% static '/img/dollaru.png'%}>
 
-                    <img id="si" src="dollaru.png"></div>
-                <div  class="col-sm-1"> <img id="si" src="trash.png"></div>
+                    <img id="si" src={% static '/img/dollaru.png'%}></div>
+                <div  class="col-sm-1"> <img id="si" src={% static '/img/trash.png'%}></div>
                 </div>
 
             <div class="row">
@@ -144,12 +144,12 @@
                   </p>
                 </div>
                 <div class="col-sm-2">
-                  <img  id="picture" src="china.jpg">
+                  <img  id="picture" src={% static '/img/china.png'%}>
 
                 </div>
 
                 <div  class="col-sm-2">
-                  <img  id="picture" src="china.jpg">
+                  <img  id="picture" src={% static '/img/china.png'%}>
 
                 </div>
               </div>
@@ -169,11 +169,11 @@
 
 
             <div id="h" class="col-sm-8">Steven's Day in Berkeley</div>
-            <div  class="col-sm-1">4 <img id="si" src="heart.png"></div>
-            <div class="col-sm-2"> <img id="si" src="dollaru.png"><img id="si" src="dollaru.png">
+            <div  class="col-sm-1">4 <img id="si" src={% static '/img/heart.png'%}></div>
+            <div class="col-sm-2"> <img id="si" src={% static '/img/dollaru.png'%}><img id="si" src={% static '/img/dollaru.png'%}>
 
-                <img id="si" src="dollaru.png"></div>
-            <div  class="col-sm-1"> <img id="si" src="trash.png"></div>
+                <img id="si" src={% static '/img/dollaru.png'%}></div>
+            <div  class="col-sm-1"> <img id="si" src={% static '/img/trash.png'%}></div>
           </div>
 
 
@@ -190,12 +190,12 @@
               </p>
             </div>
             <div class="col-sm-2">
-              <img  id="picture" src="china.jpg">
+              <img  id="picture" src={% static '/img/china.jpg'%}>
 
             </div>
 
             <div  class="col-sm-2">
-              <img  id="picture" src="china.jpg">
+              <img  id="picture" src={% static '/img/china.jpg'%}>
             </div>
           </div>
 

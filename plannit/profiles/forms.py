@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import person
 
-from plannit.models import events
-from plannit.models import schedules    
+from .models import events
+from .models import schedules    
 
 class regForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -26,7 +26,7 @@ class PersonForm(forms.ModelForm):
 class scheduleForm(forms.ModelForm):
     class Meta:
         model = schedules
-        fields = ['owner', 'place', 'date'] 
+        fields = ['owner', 'place', 'title'] 
 
 class eventForm(forms.ModelForm):
     class Meta:

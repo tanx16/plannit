@@ -109,15 +109,13 @@ class ScheduleFormView(View):
             title  = form.cleaned_data['title']
             place = form.cleaned_data['place']
             schedule.save()
-        if schedule:
-            # TODO: Add events url
-            return redirect('/events/')
+            return redirect("/profiles/addevent/")
 
         return render(request, self.template_name, {'form': form})
 
 class EventFormView(View):
     form_class = eventForm
-    template_name = 'newschedule.html'
+    template_name = 'newevent.html'
 
     def get(self, request):
         form = self.form_class()

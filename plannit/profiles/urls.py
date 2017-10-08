@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^newprofile/', views.update_person, name = 'newprofile'),
     url(r'^logout/', views.logout_view),
     url(r'^newschedule/', views.ScheduleFormView.as_view(), name = 'newschedule'),
-    url(r'^addevent/', views.EventFormView.as_view(), name = 'newevent')
+    url(r'^addevent/', views.EventFormView.as_view(), name = 'newevent'),
+    url(r'^delete/(?P<pk>\d+)/(?P<user_id>\d+)/', views.delete, name="delete_schedule"),
 ]

@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.views import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
@@ -8,11 +7,22 @@ from django.views import generic
 from django.views.generic import View
 from .forms import regForm, UserForm, PersonForm, scheduleForm, eventForm
 from .models import *
-
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import RedirectView
 
 # Create your views here.
 def index(request):
     raise Http404("You've tried to access the profile root directory. Don't do this.")
+
+def delete(request, pk, user_id):
+    obj = schedules.objects.get(pk=pk)
+    obj.delete()
+    return HttpResponseRedirect('/profiles/' + str(user_id))
+class ScheduleDelete(DeleteView):
+    model = schedules
+    success_url = reverse_lazy('index')
+    template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
     try:
@@ -117,11 +127,11 @@ class EventFormView(View):
     form_class = eventForm
     template_name = 'newevent.html'
 
-    def get(self, request):
+    def get(self, request, pk):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
-    def post(self, request):
+    def post(self, request, pk):
         form = self.form_class(request.POST)
         if form.is_valid():
             event  = form.save(commit = False)

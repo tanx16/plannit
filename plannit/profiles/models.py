@@ -16,17 +16,18 @@ class person(models.Model):
 class login(models.Model):
     username = models.CharField(max_length = 100)
     password = models.CharField(max_length = 100)
-
+"""
 def create_person(sender, **kwargs):
     user = kwargs["instance"]
     if kwargs["created"]:
         newperson = person(user=user)
         newperson.save()
 post_save.connect(create_person, sender = User)
-#@receiver(post_save, sender=User)
-#def create_user_profile(sender, instance, created, **kwargs):
-#    if created:
-#        person.objects.create(user = instance)
+"""
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        person.objects.create(user = instance)
 
 #@receiver(post_save, sender=User)
 #def save_user_profile(sender, instance, **kwargs):

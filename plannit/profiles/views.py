@@ -106,7 +106,6 @@ def logout_view(request):
 class ScheduleFormView(View):
     form_class = scheduleForm
     template_name = 'newschedule.html'
-
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
@@ -116,11 +115,9 @@ class ScheduleFormView(View):
 
         if form.is_valid():
             schedule  = form.save(commit = False)
-            owner = request.user.person
-            title  = form.cleaned_data['title']
-            place = form.cleaned_data['place']
+            schedule.owner = request.user.person
             schedule.save()
-            return redirect("/profiles/addevent/")
+            return redirect("/profiles/addevent/"+ str(schedule.id))
 
         return render(request, self.template_name, {'form': form})
 
@@ -135,12 +132,9 @@ class EventFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            sid = self.kwargs['schedule_id']
             event  = form.save(commit = False)
-            schedule = event.schedule #Does this work?
-            title  = form.cleaned_data['title']
-            start = form.cleaned_data['start']
-            end  = form.cleaned_data['end']
-            location  = form.cleaned_data['location']
+            schedule = schedules.objects.get(id=sid) 
             event.save()
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'events': schedule.events_set.all()})

@@ -33,7 +33,9 @@ class schedules(models.Model):
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
-    public = models.BooleanField()
+    # TODO: Limit price to a certain range (1-5)
+    price = models.PositiveIntegerField()
+    public = models.BooleanField(default=0) 
     def __str__(self):
         return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 

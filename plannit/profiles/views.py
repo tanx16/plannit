@@ -95,7 +95,6 @@ def logout_view(request):
 class ScheduleFormView(View):
     form_class = scheduleForm
     template_name = 'newschedule.html'
-
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
@@ -105,14 +104,19 @@ class ScheduleFormView(View):
 
         if form.is_valid():
             schedule  = form.save(commit = False)
-            owner = request.user.person
-            place = form.cleaned_data['place']
-            title  = form.cleaned_data['title']
-            public = form.cleaned_data['public']
+            schedule.owner = request.user.person
             schedule.save()
             return redirect("/profiles/addevent/")
 
         return render(request, self.template_name, {'form': form})
+
+def loadSchedule(request, schedule_id):
+    try:
+        schedule = schedule.objects.get(id=schedule_id)
+        schedule_events = schedule.event_set.all()
+    except person.DoesNotExist:
+        raise Http404("This is not the schedule you are looking for.")
+    return render(request, 'newschedule.html', {'user': user, "user_schedules": user_schedules})
 
 class EventFormView(View):
     form_class = eventForm
@@ -126,11 +130,7 @@ class EventFormView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             event  = form.save(commit = False)
-            schedule = event.schedule #Does this work?
-            title  = form.cleaned_data['title']
-            start = form.cleaned_data['start']
-            end  = form.cleaned_data['end']
-            location  = form.cleaned_data['location']
+            schedule = request.user.schedule #Does this work?
             event.save()
 
         return render(request, self.template_name, {'form': form})

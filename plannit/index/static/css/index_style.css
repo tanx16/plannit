@@ -1,0 +1,71 @@
+body {
+    background: url("/static/img/background_doodles.png");
+    background-color: lightblue;
+  }
+#mainbody {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+}
+
+#tags {
+    background-color: rgba(255, 255, 255, 0.);
+
+}
+#tagactive {
+    background-color: rgba(255, 255, 255, 0.);
+
+}
+#global {
+    background-color: blue;
+    margin: 0px;
+
+    height: 100%;
+}
+
+
+#schedule {
+
+  padding: 1%;
+  background-color: rgba(255, 255, 255, 0.8);
+
+}
+#schedulerow {
+  font-family: 'Handlee', cursive;
+  margin: 3px;
+}
+
+
+#h{
+
+  font-family: 'Handlee', cursive; font-size: 20px;
+}
+
+#title{
+
+  font-family: 'Concert One', cursive; font-size: 80px;
+}
+footer {
+
+  font-size: 10px;
+  opacity: 0.5;
+}
+#si{
+  width:24px; height:24px;
+}
+.carousel-inner > .item > img {
+  width:1920px;
+  height:400px;
+
+}
+
+
+#sb{
+  font-size: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin: 5;
+}
+
+.avatar {
+    width: 100px;
+}

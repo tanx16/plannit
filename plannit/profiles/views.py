@@ -34,6 +34,7 @@ class ScheduleDelete(DeleteView):
     template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
+    print(request.user)
     try:
         user = person.objects.get(id=profile_id)
         user_schedules = user.schedules_set.all()
@@ -68,7 +69,7 @@ class RegFormView(View):
     template_name = 'register.html'
 
     def get(self, request):
-        form = self.form_class()
+        form = self.form_class(None)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
@@ -80,25 +81,19 @@ class RegFormView(View):
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
-            user = authenticate(username=username, password=password)
-
-            if user:
+            if user is not None:
                 if user.is_active:
                     login(request, user)
-                    user.person.name = user.first_name + user.last_name
-                    user.person.bio = "My Bio"
                     return redirect('/profiles/' + str(user.person.id))
         return render(request, self.template_name, {'form': form})
 
 def update_person(request):
-    print(request.method)
     if request.method == 'POST':
         person_form = PersonForm(request.POST, instance = request.user.person)
         if person_form.is_valid():
             person_form.save()
             return redirect("/profiles/" + str(request.user.person.id))
     else:
-        print(">>>>"+str((request.user)))
         person_form = PersonForm(instance = request.user.person)
     return render(request, 'newprofile.html', {'profile_form' : person_form})
 

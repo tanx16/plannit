@@ -117,126 +117,50 @@
 
 <!-- schedule -->
 
-          <div id="schedule" class="col-sm-12">
-            <div class="row">
+{% for schedule in user_schedules%}
+<div class="row"><div style="height:0.5% ; padding: 0.5%;" class="col-sm-12"></div></div>
+<div class="row" style="padding: 1% ;">
+
+  <div class="col-sm-4"></div>
+</div>
 
 
 
-
-                <div id="h" class="col-sm-8">Steven's Day in Berkeley</div>
-                <div  class="col-sm-1">4 <img id="si" src={% static '/img/heart.png'%}></div>
-                <div class="col-sm-2"> <img id="si" src={% static '/img/dollaru.png'%}><img id="si" src={% static '/img/dollaru.png'%}>
-
-                    <img id="si" src={% static '/img/dollaru.png'%}></div>
-                <div  class="col-sm-1"> <img id="si" src={% static '/img/trash.png'%}></div>
-                </div>
-
-            <div class="row">
+  <div class="col-sm-8"; text-align: "justify">
+     <div class="row">
+       <div class="col-sm-8"; text-align: "justify">
+         <p id="bh"> {{ schedule.title }} </p></div>
 
 
-
-                <div  class="col-sm-8">
-                  <p>
-                      Steven's plan for a fun day in Berkeley.
-                  </p>
-                  <p>
-                      What happens next may shock you.
-                  </p>
-                </div>
-                <div class="col-sm-2">
-                  <img  id="picture" src={% static '/img/china.png'%}>
-
-                </div>
-
-                <div  class="col-sm-2">
-                  <img  id="picture" src={% static '/img/china.png'%}>
-
-                </div>
-              </div>
-
-              </div>
-            <div class="row"><div style="height:0.5% ; padding: 1%;" class="col-sm-4"></div>
-            </div>
+         <div  class="col-sm-4"></div>
+         </div>
+      <div class="row">
+        <div  class="col-sm-12">
 
 
+</div></div></div>
+<!-- event -->
+
+
+
+{%for even in schedule.events_set.all%}
+<div class="row"><div style="height:0.5% ; padding: 0.5%;" class="col-sm-12"></div></div>
+<div class="row" id="schedule">
+  <div id="h" class="col-sm-2">{{even.start}}-{{even.end}}</div>
+  <div id="h" style=" text-align: center;"class="col-sm-8">{{even.title}}</div>
+</div>
+<div class="row" id = "schedule" style="height:0.5% ; padding-top: 1%;">
+<p> I took the 51b to downtown Berkeley, then went to the Bart station and got off at Powel Station, train usually arrives every 10 minuites</p>
+<br>
+<br>
+</div>
+{% endfor %}
+{% endfor %}
+</div>
+</div>
 <!-- schedule block end-->
 
 
-          <div id="schedule" class="col-sm-12">
-            <div class="row">
-
-
-
-
-            <div id="h" class="col-sm-8">Steven's Day in Berkeley</div>
-            <div  class="col-sm-1">4 <img id="si" src={% static '/img/heart.png'%}></div>
-            <div class="col-sm-2"> <img id="si" src={% static '/img/dollaru.png'%}><img id="si" src={% static '/img/dollaru.png'%}>
-
-                <img id="si" src={% static '/img/dollaru.png'%}></div>
-            <div  class="col-sm-1"> <img id="si" src={% static '/img/trash.png'%}></div>
-          </div>
-
-
-        <div class="row">
-
-
-
-            <div  class="col-sm-8">
-              <p>
-                  Steven's plan for a fun day in Berkeley.
-              </p>
-              <p>
-                  What happens next may shock you.
-              </p>
-            </div>
-            <div class="col-sm-2">
-              <img  id="picture" src={% static '/img/china.jpg'%}>
-
-            </div>
-
-            <div  class="col-sm-2">
-              <img  id="picture" src={% static '/img/china.jpg'%}>
-            </div>
-          </div>
-
-            </div>
-
-
-
-        <div class="row"><div style="height:0.5% ; padding: 1%;" class="col-sm-4"></div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- bodystructures -->
-
-          <footer>
-                <div>
-                    Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from
-                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-                    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
-                    CC 3.0 BY</a>
-
-                  </div>
-            </footer>
-
-
-
-
-        <div class="col-sm-2"></div>
-        </div>
-        </div>
 <!-- bodystructures -->
 
 

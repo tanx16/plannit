@@ -29,11 +29,12 @@ post_save.connect(create_person, sender = User)
 #    instance.person.save()
 
 class schedules(models.Model):
+    title = models.CharField(max_length = 100, default='Untitled')
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     def __str__(self):
-        return self.date
+        return str(self.owner) + " - " + str(self.place) + " - " + str(self.date)
 
 class events(models.Model):
     schedule = models.ForeignKey(schedules, on_delete=models.CASCADE)

@@ -12,12 +12,15 @@
             <form method = "post">
               {% csrf_token %}
               {{ form.as_p }}
-              <button type = "submit"></button>
+              <button type = "submit">Add Event</button>
+              <button type = "submit">Add Event</button>
             </form>
         </div>
         <div>
-            {% for event in events %}
-                {{event}} 
+            {{event.count}}
+            {% for evet in event %}
+            <h1>Event:</h1>
+                {{evet}}
             {% endfor %}
         </div>
 

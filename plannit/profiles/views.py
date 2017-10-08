@@ -66,7 +66,7 @@ def logout_view(request):
 
 class ScheduleFormView(View):
     form_class = scheduleForm
-    template_name = 'new_schedule.html'
+    template_name = 'newschedule.html'
 
     def get(self, request):
         form = self.form_class()
@@ -77,9 +77,9 @@ class ScheduleFormView(View):
 
         if form.is_valid():
             schedule  = form.save(commit = False)
+            owner = request.user.person
             title  = form.cleaned_data['title']
             place = form.cleaned_data['place']
-            date = form.cleaned_data['date']
             schedule.save()
         if schedule:
             # TODO: Add events url
@@ -89,18 +89,17 @@ class ScheduleFormView(View):
 
 class EventFormView(View):
     form_class = eventForm
-    template_name = 'new_schedule.html'
+    template_name = 'newschedule.html'
 
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-
-
+        form = self.form_class(request.POST)
         if form.is_valid():
-            #TODO: Add schedule info from parent 
             event  = form.save(commit = False)
+            schedule = event.schedule #Does this work?
             title  = form.cleaned_data['title']
             start = form.cleaned_data['start']
             end  = form.cleaned_data['end']

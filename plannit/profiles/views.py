@@ -28,7 +28,7 @@ class ScheduleDelete(DeleteView):
 def loadprof(request, profile_id):
     try:
         user = person.objects.get(id=profile_id)
-        user_schedules = schedules.objects.all()
+        user_schedules = user.schedules_set.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
     if request.user.person.id == profile_id:
@@ -146,5 +146,5 @@ class EventFormView(DetailView):
             event.schedule = schedule
             event.save()
             print(schedule.events_set.all())
-            return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all()})
-        return render(request, self.template_name, {'form': form,})
+            return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all(), 'userid': schedule.owner.id})
+        return render(request, self.template_name, {'form': form, 'userid':schedule.owner.id})

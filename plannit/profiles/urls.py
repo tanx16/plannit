@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^(?P<profile_id>[0-9]+)/$', views.loadprof, name='loadprof'),
     url(r'^login/', auth_views.login, name = 'login'),
     url(r'^register/', views.RegFormView.as_view(), name = 'register'),
-    url(r'^newprofile/', views.update_person, name = 'newprofile'),
+    url(r'^editprofile/', views.update_person, name = 'newprofile'),
     url(r'^logout/', views.logout_view),
     url(r'^checkuser/', views.checkuser),
     url(r'^newschedule/', views.ScheduleFormView.as_view(), name = 'newschedule'),

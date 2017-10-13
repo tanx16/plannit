@@ -27,15 +27,14 @@ class UserForm(forms.ModelForm):
 class PersonForm(forms.ModelForm):
     class Meta:
         model = person
-        fields = ['name', 'bio', 'hometown']
+        fields = ['first_name', 'last_name', 'email', 'bio', 'hometown']
 
 class scheduleForm(forms.ModelForm):
     class Meta:
         model = schedules
-        fields = ['place', 'title'] 
+        fields = ['place', 'title']
 
 class eventForm(forms.ModelForm):
     class Meta:
         model = events
         fields = ['start', 'end', 'title', 'location']
-

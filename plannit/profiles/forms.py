@@ -37,4 +37,4 @@ class scheduleForm(forms.ModelForm):
 class eventForm(forms.ModelForm):
     class Meta:
         model = events
-        fields = ['start', 'end', 'title', 'location']
+        fields = ['start', 'end', 'title', 'location', 'description']

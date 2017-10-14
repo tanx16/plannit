@@ -40,6 +40,7 @@ class schedules(models.Model):
     owner = models.ForeignKey(person, on_delete=models.CASCADE)
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
+    likes = models.IntegerField(default = 0)
     # TODO: Limit price to a certain range (1-5)
     #price = models.PositiveIntegerField(default=0)
     # public = models.BooleanField(default=0)
@@ -52,5 +53,6 @@ class events(models.Model):
     end = models.TimeField()
     title = models.CharField(max_length = 100)
     location = models.CharField(max_length = 100)
+    description = models.CharField(max_length = 10000)
     def __str__(self):
         return self.title

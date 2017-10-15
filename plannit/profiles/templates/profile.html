@@ -12,24 +12,15 @@
         <link href="https://fonts.googleapis.com/css?family=Concert+One|Days+One|Handlee" rel="stylesheet">
         <!-- Local CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static "js/profilejs.js" %}"></script>
         <title>PLANNIT!</title>
-
     </head>
 
     <body>
 
     <!-- GLOBAL -->
-
-
-
-
     <!-- first rowL -->
-
-
-
-
-
 
     <div class="row">
         <div class="col-sm-2"></div>
@@ -143,7 +134,10 @@
 <br>
 </div>
 {% endfor %}
-<div class="col-sm-2" style = "margin-top: 2%"> &nbsp {{schedule.likes}}  &nbsp  &nbsp <img id="si" src="{% static 'img/heart.png' %}"></div>
+<div class="col-sm-2" style = "margin-top: 2%">
+  <strong id = {{schedule.id}}> &nbsp {{schedule.likes}}</strong>  &nbsp  &nbsp
+  <button class = "likes" data-scheduleid ="{{schedule.id}}"><img src="{% static 'img/heart.png' %}"></button>
+</div>
 {% endfor %}
 </div>
 </div>

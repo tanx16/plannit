@@ -37,10 +37,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 """
 class schedules(models.Model):
     title = models.CharField(max_length = 100)
-    owner = models.ForeignKey(person, on_delete=models.CASCADE)
+    owner = models.ForeignKey(person, on_delete=models.CASCADE, related_name = "my_schedules")
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     likes = models.IntegerField(default = 0)
+    person_likes = models.ManyToManyField(person, related_name = "liked_schedules")
     # TODO: Limit price to a certain range (1-5)
     #price = models.PositiveIntegerField(default=0)
     # public = models.BooleanField(default=0)

@@ -10,6 +10,7 @@ from .models import *
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import RedirectView
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -38,13 +39,25 @@ def loadprof(request, profile_id):
     print(type(profile_id))
     try:
         user = person.objects.get(id=profile_id)
-        user_schedules = user.schedules_set.all()
+        user_schedules = user.my_schedules.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
     if request.user.person.id == int(profile_id):
         print("inif")
         return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
     return render(request, 'profileview.html', {'user': user, "user_schedules": user_schedules})
+
+def like_schedule(request):
+    sched_id = None
+    if request.method == 'GET':
+        sched_id = request.GET['schedule_id']
+    likes = 0
+    if sched_id:
+        sched = schedules.objects.get(id = int(sched_id))
+        sched.likes += 1
+        likes = sched.likes
+        sched.save()
+    return HttpResponse(likes)
 
 class RegFormView(View):
     form_class = regForm
@@ -138,6 +151,5 @@ class EventFormView(DetailView):
             schedule = schedules.objects.get(id=sid)
             event.schedule = schedule
             event.save()
-            print(schedule.events_set.all())
             return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all(), 'userid': schedule.owner.id})
         return render(request, self.template_name, {'form': form, 'userid':schedule.owner.id})

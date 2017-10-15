@@ -15,6 +15,14 @@ body {
 
   }
 
+a {
+    text-decoration: none;
+  }
+
+button:focus {
+      border: none;
+      outline: none
+  }
 #nonclicked {
         background-color: rgba(255, 255, 255, 0.1);
         border-style: hidden;

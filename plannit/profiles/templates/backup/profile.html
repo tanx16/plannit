@@ -16,7 +16,8 @@
             </div>
 
             <div class="right">
-                <h1>{{user.name}}</h1>
+                <h1>{{user.first_name}}</h1>
+                <h1>{{user.last_name}}</h1>
                 <h1>{{user.hometown}}</h1>
                 <h1>{{user.bio}}</h1>
             </div>
@@ -27,7 +28,7 @@
             </p>
 
             <div class="my_schedules_header">
-                <h3>{{user.name}}'s Plans</h3>
+                <h3>{{user.first_name}} {{user.last_name}}'s Plans</h3>
             </div>
             <p>
                 {% for schedule in user_schedules %}

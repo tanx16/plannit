@@ -22,11 +22,12 @@ urlpatterns = [
     url(r'^(?P<profile_id>[0-9]+)/$', views.loadprof, name='loadprof'),
     url(r'^login/', auth_views.login, name = 'login'),
     url(r'^register/', views.RegFormView.as_view(), name = 'register'),
-    url(r'^newprofile/', views.update_person, name = 'newprofile'),
+    url(r'^editprofile/', views.update_person, name = 'newprofile'),
     url(r'^logout/', views.logout_view),
     url(r'^checkuser/', views.checkuser),
     url(r'^newschedule/', views.ScheduleFormView.as_view(), name = 'newschedule'),
     url(r'^loggedoutprofile/', views.logged_out, name = 'logged_out'),
     url(r'^delete/(?P<pk>\d+)/(?P<user_id>\d+)/', views.delete, name="delete_schedule"),
-    url(r'^addevent/(?P<schedule_id>[0-9]+)/$', views.EventFormView.as_view(), name = 'newevent')
+    url(r'^addevent/(?P<schedule_id>[0-9]+)/$', views.EventFormView.as_view(), name = 'newevent'),
+    url(r'^like_schedule/', views.like_schedule, name = 'like_schedule'),
 ]

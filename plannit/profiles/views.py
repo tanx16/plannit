@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.contrib.auth.views import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.views import generic
@@ -11,6 +10,7 @@ from .models import *
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import RedirectView
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -28,41 +28,36 @@ def delete(request, pk, user_id):
     obj = schedules.objects.get(pk=pk)
     obj.delete()
     return HttpResponseRedirect('/profiles/' + str(user_id))
+
 class ScheduleDelete(DeleteView):
     model = schedules
     success_url = reverse_lazy('index')
     template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
-    print(request.user)
+    print(type(request.user.person.id))
+    print(type(profile_id))
     try:
         user = person.objects.get(id=profile_id)
-        user_schedules = user.schedules_set.all()
+        user_schedules = user.my_schedules.all()
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
-    if request.user.person.id == profile_id:
+    if request.user.person.id == int(profile_id):
+        print("inif")
         return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
-    return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
+    return render(request, 'profileview.html', {'user': user, "user_schedules": user_schedules})
 
-class LoginView(View):
-    form_class = LoginForm
-    template_name = 'login.html'
-
-    def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username = username, password = password)
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('/profiles/' + str(user.person.id))
-        return render(request, self.template_name, {'form': form})
+def like_schedule(request):
+    sched_id = None
+    if request.method == 'GET':
+        sched_id = request.GET['schedule_id']
+    likes = 0
+    if sched_id:
+        sched = schedules.objects.get(id = int(sched_id))
+        sched.likes += 1
+        likes = sched.likes
+        sched.save()
+    return HttpResponse(likes)
 
 class RegFormView(View):
     form_class = regForm
@@ -79,12 +74,20 @@ class RegFormView(View):
             user = form.save(commit = False)
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
             user.set_password(password)
+            user.save()
+            newperson = person(user=user, first_name=first_name, last_name=last_name, email=email)
+            newperson.save()
+            user = authenticate(username=username, password=password)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             user.save()
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/profiles/' + str(user.person.id))
+                    return HttpResponseRedirect('/profiles/login/')
         return render(request, self.template_name, {'form': form})
 
 def update_person(request):
@@ -148,6 +151,5 @@ class EventFormView(DetailView):
             schedule = schedules.objects.get(id=sid)
             event.schedule = schedule
             event.save()
-            print(schedule.events_set.all())
             return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all(), 'userid': schedule.owner.id})
         return render(request, self.template_name, {'form': form, 'userid':schedule.owner.id})

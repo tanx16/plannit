@@ -43,18 +43,24 @@ def loadprof(request, profile_id):
     except person.DoesNotExist:
         raise Http404("The profile you are looking for does not exist.")
     if request.user.person.id == int(profile_id):
-        print("inif")
-        return render(request, 'profile.html', {'user': user, "user_schedules": user_schedules})
-    return render(request, 'profileview.html', {'user': user, "user_schedules": user_schedules})
+        return render(request, 'profile.html', {'curruser': request.user, 'user': user, "user_schedules": user_schedules})
+    return render(request, 'profileview.html', {'curruser': request.user, 'user': user, "user_schedules": user_schedules})
 
 def like_schedule(request):
     sched_id = None
     if request.method == 'GET':
         sched_id = request.GET['schedule_id']
+        curruser_id = request.GET['current_user']
     likes = 0
     if sched_id:
         sched = schedules.objects.get(id = int(sched_id))
-        sched.likes += 1
+        curruser = person.objects.get(id = int(curruser_id))
+        if curruser in sched.person_likes.all():
+            sched.likes -= 1
+            sched.person_likes.remove(curruser)
+        else:
+            sched.likes += 1
+            sched.person_likes.add(curruser)
         likes = sched.likes
         sched.save()
     return HttpResponse(likes)

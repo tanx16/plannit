@@ -134,9 +134,15 @@
 <br>
 </div>
 {% endfor %}
-<div class="col-sm-2" style = "margin-top: 2%">
-  <strong id = {{schedule.id}}> &nbsp {{schedule.likes}}</strong>  &nbsp  &nbsp
-  <button class = "likes" data-scheduleid ="{{schedule.id}}"><img src="{% static 'img/heart.png' %}"></button>
+<div class = "row">
+<div class="col-sm-2" style = "margin-top: 2%;">
+  <strong id = {{schedule.id}}> {{schedule.likes}} </strong>
+</div>
+<div class = "col-sm-10" style = "margin-top: 2%">
+  <input style = "width : 4%; height: 4%" type = "image" id = {{schedule.id}} class = "likes"
+  data-scheduleid = "{{schedule.id}}" data-user = "{{curruser.person.id}}"
+  src = "{% static 'img/notliked2.png' %}"/>
+</div>
 </div>
 {% endfor %}
 </div>

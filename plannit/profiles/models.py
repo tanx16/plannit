@@ -14,7 +14,12 @@ class person(models.Model):
     pic = models.ImageField()
     def __str__(self):
         return self.first_name + self.last_name
-
+    """
+class city(models.Model):
+    name = models.CharField(max_length = 100, default = "")
+    country = models.CharField(max_length = 100, default = "")
+    state = models.CharField(max_length = 100, default = "", blank = True)
+    """
 class login(models.Model):
     username = models.CharField(max_length = 100)
     password = models.CharField(max_length = 100)
@@ -37,7 +42,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 """
 class schedules(models.Model):
     title = models.CharField(max_length = 100)
-    owner = models.ForeignKey(person, on_delete=models.CASCADE, related_name = "my_schedules")
+    owner = models.ForeignKey(person, on_delete=models.CASCADE, related_name = "my_schedules", default = "")
+    #city = models.ForeignKey(city, on_delete=models.CASCADE, related_name = "city_schedules", default = "")
     place = models.CharField(max_length = 100)
     date = models.DateField(auto_now_add = True)
     likes = models.IntegerField(default = 0)

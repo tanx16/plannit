@@ -18,6 +18,7 @@ def index(request):
 
 def checkuser(request):
     if request.user.is_authenticated():
+        print("lol")
         return HttpResponseRedirect('/profiles/' +str(request.user.person.id))
     return HttpResponseRedirect('/profiles/login')
 

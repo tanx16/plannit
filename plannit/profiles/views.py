@@ -18,6 +18,7 @@ def index(request):
 
 def checkuser(request):
     if request.user.is_authenticated():
+        print("lol")
         return HttpResponseRedirect('/profiles/' +str(request.user.person.id))
     return HttpResponseRedirect('/profiles/login')
 
@@ -35,8 +36,6 @@ class ScheduleDelete(DeleteView):
     template_name = 'delete_schedule.html'
 
 def loadprof(request, profile_id):
-    print(type(request.user.person.id))
-    print(type(profile_id))
     try:
         user = person.objects.get(id=profile_id)
         user_schedules = user.my_schedules.all()
@@ -52,10 +51,12 @@ def like_schedule(request):
         sched_id = request.GET['schedule_id']
         curruser_id = request.GET['current_user']
     likes = 0
+    liked = "liked2.png"
     if sched_id:
         sched = schedules.objects.get(id = int(sched_id))
         curruser = person.objects.get(id = int(curruser_id))
         if curruser in sched.person_likes.all():
+            liked = "notliked2.png"
             sched.likes -= 1
             sched.person_likes.remove(curruser)
         else:
@@ -63,7 +64,7 @@ def like_schedule(request):
             sched.person_likes.add(curruser)
         likes = sched.likes
         sched.save()
-    return HttpResponse(likes)
+    return HttpResponse(str(likes) + "/" + str(liked))
 
 class RegFormView(View):
     form_class = regForm
@@ -134,7 +135,7 @@ class ScheduleFormView(View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            schedule  = form.save(commit = False)
+            schedule = form.save(commit = False)
             schedule.owner = request.user.person
             schedule.save()
             return redirect("/profiles/addevent/"+ str(schedule.id))

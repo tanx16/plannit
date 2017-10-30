@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles.apps.ProfilesConfig',
     'index.apps.IndexConfig',
+    'cities_light',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

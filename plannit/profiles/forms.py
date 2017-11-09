@@ -4,6 +4,8 @@ from .models import person
 from .models import login
 from .models import events
 from .models import schedules
+from cities_light.models import City
+from dal import autocomplete
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -32,7 +34,8 @@ class PersonForm(forms.ModelForm):
 class scheduleForm(forms.ModelForm):
     class Meta:
         model = schedules
-        fields = ['place', 'title']
+        fields = ['place', 'title', 'city']
+        widgets= {'city': autocomplete.ModelSelect2(url = 'city-autocomplete')}
 
 class eventForm(forms.ModelForm):
     class Meta:

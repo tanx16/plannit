@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^delete/(?P<pk>\d+)/(?P<user_id>\d+)/', views.delete, name="delete_schedule"),
     url(r'^addevent/(?P<schedule_id>[0-9]+)/$', views.EventFormView.as_view(), name = 'newevent'),
     url(r'^like_schedule/', views.like_schedule, name = 'like_schedule'),
+    url(r'^city-autocomplete/', views.CityAutocomplete.as_view(), name = 'city-autocomplete'),
 ]

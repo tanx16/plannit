@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^accounts/profile/', views.home),
     url(r'^index/', include('index.urls')),
     url(r'^', include('index.urls')),
-    url(r'^profiles/', include('cities.urls')),
+
 ]

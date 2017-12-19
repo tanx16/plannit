@@ -11,6 +11,8 @@ from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import login_required
+from dal import autocomplete
+from cities_light.models import City
 
 # Create your views here.
 def index(request):
@@ -160,3 +162,14 @@ class EventFormView(DetailView):
             event.save()
             return render(request, self.template_name, {'form': form, 'event':schedule.events_set.all(), 'userid': schedule.owner.id})
         return render(request, self.template_name, {'form': form, 'userid':schedule.owner.id})
+
+class CityAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return City.objects.none()
+
+        qs = City.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+        return qs
